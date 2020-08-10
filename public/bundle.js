@@ -1,11 +1,12 @@
 import {html, render} from 'https://unpkg.com/lit-html?module';
 
 function speak(msg) {
-  const voices = window.speechSynthesis.getVoices().filter(v => {
+  const voices = window.speechSynthesis.getVoices();
+  const englishVoices = voices.filter(v => {
     const lang = v.lang.replace('_', '-').toLowerCase();
     return lang == 'en-gb';
   });
-  const voiceToUse = voices[0];
+  const voiceToUse = englishVoices[0] || voices[0];
   window.speechSynthesis.cancel();
   const m = new SpeechSynthesisUtterance();
   m.voice = voiceToUse;
