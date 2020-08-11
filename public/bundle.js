@@ -55,7 +55,7 @@ extreme
 famous
 favourite
 February
-forward(s)
+forward
 fruit
 grammar
 group
