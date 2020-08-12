@@ -13,6 +13,8 @@
       margin: 12px auto;
     }
     .correct, .incorrect {
+      display: flex;
+      align-items: baseline;
       padding: 6px;
       border-radius: 6px;
     }
@@ -22,6 +24,10 @@
     .incorrect {
       padding: 6px;
       border: solid 1px red;
+    }
+    .correct div, .incorrect div {
+      flex: auto;
+      height: 40px;
     }
     .correct button, .incorrect button {
       height: 40px;

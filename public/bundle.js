@@ -4,7 +4,7 @@ function speak(msg) {
   const voices = window.speechSynthesis.getVoices();
   const englishVoices = voices.filter(v => {
     const lang = v.lang.replace('_', '-').toLowerCase();
-    return lang == 'en-gb';
+    return lang === 'en-gb';
   });
   const voiceToUse = englishVoices[0] || voices[0];
   window.speechSynthesis.cancel();
@@ -127,15 +127,21 @@ let inputArray;
 
 const template = (vocabToDisplay, vocab, isCorrect, isIncorrect) => html`
 <h1 @click=${() => speak(vocab)}>${vocabToDisplay}</h1>
-<div class="correct" style="${isCorrect ? '' : 'display:none'}">Correct!<button @click=${() => {
-  starving = true;
-  index++;
-  generator.next();
-}}>Next</button></div>
-<div class="incorrect" style="${isIncorrect ? '' : 'display:none'}">Incorrect!<button @click=${() => {
-  starving = true;
-  generator.next();
-}}>Try again</button></div>
+<div class="correct" style="${isCorrect ? '' : 'display:none'}">
+  <div>Correct!</div>
+  <button @click=${() => {
+    starving = true;
+    index++;
+    generator.next();
+  }}>Next</button>
+</div>
+<div class="incorrect" style="${isIncorrect ? '' : 'display:none'}">
+  <div>Incorrect!</div>
+  <button @click=${() => {
+    starving = true;
+    generator.next();
+  }}>Try again</button>
+</div>
 <div class="alphas" @click=${e => {
   if (!e.target.id) return;
   inputArray.push(e.target.id);
@@ -171,7 +177,7 @@ function* infinite() {
     let isCorrect = false;
     let isIncorrect = false;
     if (!vocabToDisplay.includes('_')) {
-      if (vocab == vocabToDisplay) {
+      if (vocab === vocabToDisplay) {
         isCorrect = true;
       } else {
         isIncorrect = true;
