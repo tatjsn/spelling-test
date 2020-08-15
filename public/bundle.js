@@ -121,7 +121,9 @@ weight
 woman
 women`.split('\n');
 
-let index = 0;
+const locationUrl = new URL(window.location.href);
+const startedAt = +locationUrl.searchParams.get('s') || 0;
+let index = startedAt;
 let starving = true;
 let inputArray;
 
@@ -154,6 +156,7 @@ const template = (vocabToDisplay, vocab, isCorrect, isIncorrect) => html`
   <button id="u">U</button>
 </div>
 <div class="status">Question ${index + 1} of ${vocabs.length}</div>
+${ startedAt > 0 ? html`<div>Started at ${startedAt}</div>` : null}
 `;
 
 function* infinite() {
