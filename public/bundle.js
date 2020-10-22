@@ -64,9 +64,25 @@ const template = (vocabToDisplay, vocab, isCorrect, isIncorrect) => html`
 ${ startedAt > 0 ? html`<div>Started at ${startedAt}</div>` : null}
 `;
 
+const endingTemplate = () => html`
+<h1>The End</h1>
+<div>
+  <button @click=${() => {
+    index = startedAt;
+    generator.next();
+  }}>Play Again</button>
+</div>
+`;
+
+const container = document.getElementById('app');
+
 function* infinite() {
   while (true) {
     if (starving) {
+      if (index >= vocabs.length) {
+        render(endingTemplate(), container);
+        yield;
+      }
       inputArray = [];
       starving = false;
       speak(vocabs[index]);
@@ -91,7 +107,7 @@ function* infinite() {
         isIncorrect = true;
       }
     }
-    render(template(vocabToDisplay, vocab, isCorrect, isIncorrect), document.getElementById('app'));
+    render(template(vocabToDisplay, vocab, isCorrect, isIncorrect), container);
     yield;
   }
 }
