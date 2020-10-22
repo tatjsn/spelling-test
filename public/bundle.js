@@ -60,6 +60,14 @@ const template = (vocabToDisplay, vocab, isCorrect, isIncorrect) => html`
   <button id="o">O</button>
   <button id="u">U</button>
 </div>
+<div class="alphas" @click=${e => {
+  if (e.target.id === 'del') {
+    inputArray.pop();
+    generator.next();
+  }
+}}>
+  <button id="del">del</button>
+</div>
 <div class="status">Question ${index + 1} of ${vocabs.length}</div>
 ${ startedAt > 0 ? html`<div>Started at ${startedAt}</div>` : null}
 `;
