@@ -16,15 +16,15 @@ function speak(msg) {
   window.speechSynthesis.speak(m);
 }
 
-const vocabs = `information
-adoration
-sensation
-preparation
-admiration
-fixation
-inflammation
-elevation
-restoration`.split('\n');
+const vocabs = `measure
+treasure
+pleasure
+enclosure
+creature
+furniture
+picture
+nature
+adventure`.split('\n');
 
 const locationUrl = new URL(window.location.href);
 const startedAt = +locationUrl.searchParams.get('s') || 0;
